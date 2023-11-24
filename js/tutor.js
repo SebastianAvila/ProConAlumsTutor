@@ -49,6 +49,10 @@ $(document).ready(function () {
                 return data === true ? "Ina" : "Act";
               },
             },
+            {
+              data: null,
+              
+            },
             
           ],
         });

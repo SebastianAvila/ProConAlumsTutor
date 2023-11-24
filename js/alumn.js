@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  // Otro archivo.js
-
   // Obtener el token almacenado en el localStorage
   var authorizationToken = localStorage.getItem("token");
 
@@ -103,7 +101,7 @@ $(document).ready(function () {
     //obtiene los datos del ajax y los imprime
     if (dataAlumn.Records && Array.isArray(dataAlumn.Records)) {
       // Llenar DataTable
-      $("#tableAlumns").DataTable({
+      const dataTable = $("#tableAlumns").DataTable({
         destroy: true,
         data: dataAlumn.Records,
         columns: [
@@ -128,7 +126,29 @@ $(document).ready(function () {
           },
         ],
       });
-      // Resto del código ...
+      $("#tableAlumns tbody").on("click", ".btn-details", function () {
+        const rowData = dataTable.row($(this).parents("tr")).data();
+        console.log(rowData);
+        // Actualiza el contenido del modal con la información del alumno
+        $("#modal-body-content").html(
+          `<h1>Datos del alumnos</h1>
+          <p><strong>id:</strong> ${rowData.IdAlumn}</p>
+           <p><strong>Nombre:</strong> ${rowData.Name}</p>
+           <p><strong>Apellido:</strong> ${rowData.LastName}</p>
+           <p><strong>Apellido Materno:</strong> ${rowData.MotherLastName}</p>
+           <p><strong>Email:</strong> ${rowData.Email}</p>
+           <p><strong>Curp:</strong> ${rowData.Curp}</p>
+           <p><strong>Phone:</strong> ${rowData.Phone}</p>
+           <p><strong>Cumpleaños:</strong> ${rowData.BirthDate}</p>
+           <p><strong>Genero:</strong> ${rowData.Gender}</p>
+           <p><strong>Active:</strong> ${rowData.Active}</p>
+           
+           `
+        );
+
+        // Muestra el modal
+        $("#myModal").modal("show");
+      });
     } else {
       console.error("No se encuentran datos en el servidor");
     }
