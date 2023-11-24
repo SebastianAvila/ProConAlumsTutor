@@ -62,11 +62,15 @@
             onclick="loadView('components/tutor.html')"
             >CRUD Tutores</a
           >
+
           <a
             class="list-group-item list-group-item-action list-group-item-light p-3"
+          ></a>
+          <a
+            id="logout-link"
+            class="list-group-flush list-group-item-light list-group-item-light p-3"
             href="#"
-            onclick="loadView('components/associations.html')"
-            >Asociaciones</a
+            >Log out</a
           >
         </div>
       </div>
@@ -94,6 +98,21 @@
         // Utiliza jQuery para cargar la vista en el área de contenido
         $("#content").load(view);
       }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Evento de clic para el enlace de logout
+        $("#logout-link").click(function (e) {
+          // Evitar el comportamiento predeterminado del enlace
+          e.preventDefault();
+
+          // Limpiar el token del localStorage (logout)
+          localStorage.removeItem("token");
+
+          // Redirigir al usuario a la página de inicio de sesión (login.html)
+          window.location.href = "/";
+        });
+      });
     </script>
   </body>
 </html>

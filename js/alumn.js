@@ -123,13 +123,7 @@ $(document).ready(function () {
               return `<span>${description}</span>`;
             },
           },
-          {
-            data: null,
-            defaultContent:
-              '<button class="btn btn-info btn-sm btn-edit"><i class="bi bi-pencil-square"></i></button>' +
-              '<button class="btn btn-warning btn-sm btn-details"><i class="bi bi-info-circle"></i></button>',
-            targets: -1,
-          },
+          
         ],
       });
       // Resto del código ...
