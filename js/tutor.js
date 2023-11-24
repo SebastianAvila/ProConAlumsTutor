@@ -1,6 +1,9 @@
 $(document).ready(function () {
-  const authorizationToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjoiMTQzZTNiN2QtMWIzMC00N2Y5LWFmNmMtODIzMjFmMjliYWE2IiwiVHlwZUFwcCI6IldFQiIsIlR5cGVVc2VyIjoiVEVBQ0hFUi1FTVBMT1lFRSIsImV4cCI6MTcwMDc3NjIzMCwianRpIjoiMTQzZTNiN2QtMWIzMC00N2Y5LWFmNmMtODIzMjFmMjliYWE2IiwiaXNzIjoiU2lzdGVtZXhpY28ubmV0Iiwic3ViIjoiVmFsaWRhdGlvbiBUb2tlbiJ9.cThZhVjTvL33NPmffGa2Wh3LfXTUsL0IHd8WWdDrazc";
+  // Obtener el token almacenado en el localStorage
+  var authorizationToken = localStorage.getItem("token");
+
+  console.log(authorizationToken);
+
   const datosParaEnviar = {
     Code: "",
     Curp: "",

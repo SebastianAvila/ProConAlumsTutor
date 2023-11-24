@@ -8,7 +8,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>CRUD</title>
+    <title>Login</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -45,55 +45,71 @@
     ></script>
   </head>
   <body>
-    <div class="d-flex" id="wrapper">
-      <!-- Sidebar-->
-      <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light">SisteMexico</div>
-        <div class="list-group list-group-flush">
-          <a
-            class="list-group-item list-group-item-action list-group-item-light p-3"
-            href="#"
-            onclick="loadView('components/alumns.html')"
-            >CRUD Alumnos</a
-          >
-          <a
-            class="list-group-item list-group-item-action list-group-item-light p-3"
-            href="#"
-            onclick="loadView('components/tutor.html')"
-            >CRUD Tutores</a
-          >
-          <a
-            class="list-group-item list-group-item-action list-group-item-light p-3"
-            href="#"
-            onclick="loadView('components/associations.html')"
-            >Asociaciones</a
-          >
-        </div>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid"
+          alt="Sample image"
+        />
       </div>
-      <!-- Page content wrapper-->
-      <div id="page-content-wrapper">
-        <!-- Top navigation-->
-        <nav class="navbar navbar-light bg-light border-bottom">
-          <div class="container-fluid">
-            <button class="btn btn-grey navbar-toggler" id="sidebarToggle">
-              <span class="navbar-toggler-icon"></span>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form>
+          <div class="divider d-flex align-items-center my-4">
+            <h1>Login SisteMexico</h1>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input
+              type="email"
+              id="form3Example3"
+              class="form-control form-control-lg"
+              placeholder="Enter a valid email address"
+            />
+            <label class="form-label" for="form3Example3">Email address</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input
+              type="password"
+              id="form3Example4"
+              class="form-control form-control-lg"
+              placeholder="Enter password"
+            />
+            <label class="form-label" for="form3Example4">Password</label>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+              <input
+                class="form-check-input me-2"
+                type="checkbox"
+                value=""
+                id="form2Example3"
+              />
+              <label class="form-check-label" for="form2Example3">
+                Remember me
+              </label>
+            </div>
+            <a href="#!" class="text-body">Forgot password?</a>
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem"
+            >
+              Login
             </button>
           </div>
-        </nav>
-        <!-- Page content-->
-        <div id="content">
-          <!-- Contenido se cargará aquí -->
-        </div>
+        </form>
       </div>
     </div>
-
-    <script src="js/scripts.js"></script>
-    <!-- Tu script personalizado -->
-    <script>
-      function loadView(view) {
-        // Utiliza jQuery para cargar la vista en el área de contenido
-        $("#content").load(view);
-      }
-    </script>
   </body>
 </html>
+
+<script src="js/login.js"></script>
