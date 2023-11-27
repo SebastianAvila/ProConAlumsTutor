@@ -2,7 +2,14 @@ $(document).ready(function () {
   // Obtener el token almacenado en el localStorage
   var authorizationToken = localStorage.getItem("token");
 
-  console.log(authorizationToken);
+  // Verificar si se obtuvo un token
+  if (authorizationToken) {
+    // Puedes imprimirlo en la consola para verificar
+    console.log("Token obtenido");
+  } else {
+    // No se encontró un token en el localStorage
+    console.error("No se encontró un token en el localStorage");
+  }
 
   const datosParaEnviar = {
     Code: "",
@@ -35,7 +42,7 @@ $(document).ready(function () {
     },
     success: function (data) {
       if (data.Records && Array.isArray(data.Records)) {
-        $("#tableTutor").DataTable({
+        const dataTable = $("#tableTutor").DataTable({
           destroy: true,
           data: data.Records,
           columns: [
@@ -51,9 +58,11 @@ $(document).ready(function () {
             },
             {
               data: null,
-              
+              defaultContent:
+                // '<button class="btn btn-info btn-sm btn-edit"><i class="bi bi-pencil-square"></i></button>' +
+                '<button class="btn btn-warning btn-sm btn-details"><i class="bi bi-info-circle"></i></button>',
+              targets: -1,
             },
-            
           ],
         });
 
@@ -101,12 +110,26 @@ $(document).ready(function () {
         });
 
         $("#tableTutor").on("click", ".btn-details", function () {
-          var data = $("#tableTutor")
-            .DataTable()
-            .row($(this).parents("tr"))
-            .data();
+          const rowData = dataTable.row($(this).parents("tr")).data();
+          console.log(rowData);
           // Lógica para mostrar detalles utilizando los datos en 'data'
-          console.log("Detalles:", data);
+          // console.log("Detalles:", data);
+
+          $("#modal-body-content").html(
+            `<h1>Datos del Maestros</h1>
+            <p><strong>id:</strong> ${rowData.IdTutor}</p>
+             <p><strong>Nombre:</strong> ${rowData.Name}</p>
+             <p><strong>Apellido:</strong> ${rowData.LastName}</p>
+             <p><strong>Apellido Materno:</strong> ${rowData.MotherLastName}</p>
+             <p><strong>Email:</strong> ${rowData.Email}</p>
+             <p><strong>Curp:</strong> ${rowData.Curp}</p>
+             <p><strong>Phone:</strong> ${rowData.Phone}</p>
+             <p><strong>Cumpleaños:</strong> ${rowData.BirthDate}</p>
+             <p><strong>Genero:</strong> ${rowData.Gender}</p>
+             <p><strong>Active:</strong> ${rowData.Active}</p>
+             
+             `
+          );
         });
       } else {
         console.error("No se encuentran datos en el servidor");

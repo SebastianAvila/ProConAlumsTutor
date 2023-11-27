@@ -5,7 +5,7 @@ $(document).ready(function () {
   // Verificar si se obtuvo un token
   if (authorizationToken) {
     // Puedes imprimirlo en la consola para verificar
-    console.log("Token obtenido:", authorizationToken);
+    console.log("Token obtenido");
   } else {
     // No se encontró un token en el localStorage
     console.error("No se encontró un token en el localStorage");
@@ -120,7 +120,7 @@ $(document).ready(function () {
           {
             data: null,
             defaultContent:
-              '<button class="btn btn-info btn-sm btn-edit"><i class="bi bi-pencil-square"></i></button>' +
+              // '<button class="btn btn-info btn-sm btn-edit"><i class="bi bi-pencil-square"></i></button>' +
               '<button class="btn btn-warning btn-sm btn-details"><i class="bi bi-info-circle"></i></button>',
             targets: -1,
           },
