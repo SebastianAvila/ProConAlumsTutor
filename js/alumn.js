@@ -43,9 +43,23 @@ $(document).ready(function () {
     },
   };
 
+  const dataCampusRequest = {
+    IdCampus: "",
+    IdAddress: "",
+    NameCampus: "",
+    WorkCenterKeyCampus: "",
+    TimeZone: "",
+    Pagination: {
+      CurrentPage: "1",
+      IncludesRelations: ["Alumn", "Tutor", "ListPermission"],
+      PerPager: "1000",
+    },
+  };
+
   // ====================== URLS API ==========================
   const url = "http://localhost:3000/v1/alumn/alumn/find";
   const urlStatus = "http://localhost:3000/v1/alumn/statusalumn/find";
+  const urlCampus = "http://localhost:3000/v1/academic/campus/find";
 
   //==================================Ajax que obtiene los datos de los alumnos para imprimirlos en la tabla==========================================
   $.ajax({
@@ -128,26 +142,53 @@ $(document).ready(function () {
       });
       $("#tableAlumns tbody").on("click", ".btn-details", function () {
         const rowData = dataTable.row($(this).parents("tr")).data();
-        console.log(rowData);
-        // Actualiza el contenido del modal con la información del alumno
-        $("#modal-body-content").html(
-          `<h1>Datos del alumnos</h1>
-          <p><strong>id:</strong> ${rowData.IdAlumn}</p>
-           <p><strong>Nombre:</strong> ${rowData.Name}</p>
-           <p><strong>Apellido:</strong> ${rowData.LastName}</p>
-           <p><strong>Apellido Materno:</strong> ${rowData.MotherLastName}</p>
-           <p><strong>Email:</strong> ${rowData.Email}</p>
-           <p><strong>Curp:</strong> ${rowData.Curp}</p>
-           <p><strong>Phone:</strong> ${rowData.Phone}</p>
-           <p><strong>Cumpleaños:</strong> ${rowData.BirthDate}</p>
-           <p><strong>Genero:</strong> ${rowData.Gender}</p>
-           <p><strong>Active:</strong> ${rowData.Active}</p>
-           
-           `
-        );
 
-        // Muestra el modal
-        $("#myModal").modal("show");
+        // Make the AJAX request
+        $.ajax({
+          url: urlCampus,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(dataCampusRequest),
+          headers: {
+            "Content-Type": "application/json",
+            Campus: `Bearer ${campus}`,
+            Authorization: `Bearer ${authorizationToken}`,
+          },
+          success: function (dataCampusAlumn) {
+            var records = dataCampusAlumn.Records;
+
+            for (var i = 0; i < records.length; i++) {
+              var campusRecord = records[i];
+              var IdCampus = campusRecord.IdCampus;
+
+              if (IdCampus == rowData.IdCampus) {
+                console.log("Campus del alumn:", campusRecord.NameCampus);
+
+                // Update the modal body content with the campus name
+                $("#modal-body-content").html(
+                  `<h1>Datos del alumno</h1>
+                            <p><strong>id:</strong> ${rowData.IdAlumn}</p>
+                            <p><strong>Nombre:</strong> ${rowData.Name}</p>
+                            <p><strong>Apellido:</strong> ${rowData.LastName}</p>
+                            <p><strong>Apellido Materno:</strong> ${rowData.MotherLastName}</p>
+                            <p><strong>Email:</strong> ${rowData.Email}</p>
+                            <p><strong>Curp:</strong> ${rowData.Curp}</p>
+                            <p><strong>Phone:</strong> ${rowData.Phone}</p>
+                            <p><strong>Cumpleaños:</strong> ${rowData.BirthDate}</p>
+                            <p><strong>Genero:</strong> ${rowData.Gender}</p>
+                            <p><strong>Active:</strong> ${rowData.Active}</p>
+                            <p><strong>Campus del alumno:</strong> ${campusRecord.NameCampus}</p>`
+                );
+
+                // Show the modal after updating the content
+                $("#myModal").modal("show");
+              }
+            }
+          },
+          error: function (error) {
+            console.error("Error:", error);
+          },
+        });
       });
     } else {
       console.error("No se encuentran datos en el servidor");
